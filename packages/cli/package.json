@@ -1,0 +1,11 @@
+{
+  "name": "graidr",
+  "version": "0.1.2",
+  "description": "Score your repo automatically on every push",
+  "bin": { "graidr": "./index.js" },
+  "keywords": ["github-actions", "code-quality", "ci"],
+  "repository": "github:aletex1994/graidr",
+  "license": "MIT",
+  "files": ["index.js", "graidr-scorer.js"],
+  "engines": { "node": ">=18" }
+}

@@ -1,0 +1,41 @@
+name: Graidr — score this repo
+
+# Zero setup — GITHUB_TOKEN is automatic. No secrets needed for standard scans.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      deep:
+        description: 'Deep scan (more context, slower)'
+        type: boolean
+        default: false
+
+permissions:
+  models: read        # required for GitHub Models
+  contents: read
+  pull-requests: write
+
+jobs:
+  grade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Graidr scorer
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEEP_SCAN: ${{ github.event.inputs.deep || 'false' }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: node scorer/score.js
