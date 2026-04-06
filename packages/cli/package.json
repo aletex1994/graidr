@@ -1,6 +1,6 @@
 {
   "name": "graidr",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Score your repo automatically on every push",
   "bin": { "graidr": "./index.js" },
   "keywords": ["github-actions", "code-quality", "ci"],
