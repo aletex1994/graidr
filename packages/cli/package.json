@@ -6,6 +6,6 @@
   "keywords": ["github-actions", "code-quality", "ci"],
   "repository": "github:aletex1994/graidr",
   "license": "MIT",
-  "files": ["index.js", "graidr-scorer.js"],
+  "files": ["index.js", "graidr-scorer.cjs"],
   "engines": { "node": ">=18" }
 }
