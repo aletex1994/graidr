@@ -98,7 +98,7 @@ function collectFacts() {
     facts.env_in_gitignore = /\.env/.test(gi)
   }
   facts.env_files_committed = shCount("git ls-files -- '.env*' | wc -l") > 0
-  facts.potential_secrets = shCount("git ls-files -- '*.ts' '*.tsx' '*.js' '*.jsx' '*.json' | xargs grep -Eil '(sk-|sk_live|AKIA|password\\s*=\\s*\"|api_key\\s*=\\s*\")' 2>/dev/null | wc -l")
+  facts.potential_secrets = shCount("git ls-files -- '*.ts' '*.tsx' '*.js' '*.jsx' '*.json' | grep -Ev '(^|/)(package-lock\\.json|yarn\\.lock|pnpm-lock\\.yaml|npm-shrinkwrap\\.json)$' | xargs grep -Eil '(\\bsk-[a-zA-Z0-9]{20,}|\\bsk_live_[a-zA-Z0-9]+|\\bAKIA[0-9A-Z]{16}\\b|\\bpassword\\s*=\\s*\"[^\"]+\"|\\bapi_key\\s*=\\s*\"[^\"]+\")' 2>/dev/null | wc -l")
   facts.eval_usage = shCount("git ls-files -- '*.ts' '*.tsx' '*.js' '*.jsx' | xargs grep -l 'eval(' 2>/dev/null | wc -l") > 0
 
   // Completeness facts
