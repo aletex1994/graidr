@@ -13,7 +13,7 @@ const readline = require('readline')
 
 // Read the bundled scorer — shipped alongside index.js in the npm package
 const SCORER_INLINE = fs.readFileSync(
-  path.join(__dirname, 'graidr-scorer.js'),
+  path.join(__dirname, 'graidr-scorer.cjs'),
   'utf8'
 )
 
@@ -49,7 +49,7 @@ jobs:
           GITHUB_SHA: \${{ github.sha }}
           GITHUB_REF_NAME: \${{ github.ref_name }}
           PR_NUMBER: \${{ github.event.pull_request.number }}
-        run: node .github/workflows/graidr-scorer.js
+        run: node .github/workflows/graidr-scorer.cjs
 `
 
 // ── CLI colors ─────────────────────────────────────────────────
@@ -107,7 +107,7 @@ async function main() {
 
   // 3. Check if graidr.yml already exists
   const ymlPath    = path.join(workflowsDir, 'graidr.yml')
-  const scorerPath = path.join(workflowsDir, 'graidr-scorer.js')
+  const scorerPath = path.join(workflowsDir, 'graidr-scorer.cjs')
 
   if (fs.existsSync(ymlPath)) {
     const answer = await ask('  graidr.yml already exists. Overwrite? (y/n) ')
@@ -130,7 +130,7 @@ async function main() {
   print('  No API keys needed — uses GitHub Models automatically.')
   print('')
   print('  Next:')
-  print('  ' + dim('git add .github/workflows/graidr.yml .github/workflows/graidr-scorer.js'))
+  print('  ' + dim('git add .github/workflows/graidr.yml .github/workflows/graidr-scorer.cjs'))
   print('  ' + dim('git commit -m "add graidr scoring"'))
   print('  ' + dim('git push'))
   print('')
