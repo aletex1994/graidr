@@ -2,6 +2,16 @@ import { supabase, type Score } from '@/lib/supabase'
 import LeaderboardTable from '@/components/LeaderboardTable'
 import Link from 'next/link'
 
+// Opt out of the Next.js full-route cache so newly submitted scores appear
+// immediately. Without this, the page is statically rendered at build time
+// and serves stale HTML until the next deploy — meaning scores submitted via
+// the GitHub Action land in Supabase successfully but never show up on the
+// leaderboard until graidr.tools is redeployed.
+//
+// Use `revalidate = 60` instead if you want up-to-60s caching as traffic
+// grows; `force-dynamic` is the safest default for a live leaderboard.
+export const dynamic = 'force-dynamic'
+
 async function getLeaderboard(): Promise<Score[]> {
   const { data, error } = await supabase
     .from('leaderboard')
