@@ -1,13 +1,29 @@
 {
   "name": "graidr",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "description": "Automatic code quality scores for every push — powered by GitHub Models, zero setup",
-  "bin": { "graidr": "./index.js" },
-  "keywords": ["github-actions", "code-quality", "ci", "code-review", "scoring", "badge", "linter"],
+  "bin": {
+    "graidr": "./index.js"
+  },
+  "keywords": [
+    "github-actions",
+    "code-quality",
+    "ci",
+    "code-review",
+    "scoring",
+    "badge",
+    "linter"
+  ],
   "repository": "github:aletex1994/graidr",
   "homepage": "https://graidr.tools",
   "bugs": "https://github.com/aletex1994/graidr/issues",
   "license": "MIT",
-  "files": ["index.js", "graidr-scorer.cjs"],
-  "engines": { "node": ">=18" }
+  "files": [
+    "index.js",
+    "graidr-scorer.cjs",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
 }

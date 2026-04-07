@@ -84,7 +84,7 @@ export default async function Home() {
 
           {/* Subheadline */}
           <p className="text-base text-zinc-400 max-w-lg leading-snug">
-            Automatic code quality scores on every push — no API keys, zero setup, free forever.
+            Automatic code quality scores on every push — no API keys, zero setup, <span className="text-emerald-200">free forever</span>.
           </p>
 
           {/* Install command */}
