@@ -14,7 +14,11 @@
     "badge",
     "linter"
   ],
-  "repository": "github:aletex1994/graidr",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aletex1994/graidr.git",
+    "directory": "packages/cli"
+  },
   "homepage": "https://graidr.tools",
   "bugs": "https://github.com/aletex1994/graidr/issues",
   "license": "MIT",
