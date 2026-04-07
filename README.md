@@ -1,6 +1,6 @@
 # graidr
 
-[![graidr score](https://img.shields.io/endpoint?url=https://graidr.tools/api/score/aletex1994/graidr)](https://graidr.tools)
+[![graidr score](https://img.shields.io/endpoint?url=https%3A%2F%2Fgraidr.tools%2Fapi%2Fscore%2Faletex1994%2Fgraidr)](https://graidr.tools)
 
 **Automatic code quality scores for every push. Zero setup.**
 
@@ -79,6 +79,16 @@ jobs:
 ```
 
 That's it. No secrets to add. No tokens to manage. Push and it runs.
+
+### Add a score badge to your README
+
+Once your repo has been scored, add this to your README (replace `OWNER/REPO` with your GitHub owner and repo name):
+
+```markdown
+[![graidr score](https://img.shields.io/endpoint?url=https%3A%2F%2Fgraidr.tools%2Fapi%2Fscore%2FOWNER%2FREPO)](https://graidr.tools)
+```
+
+The badge updates automatically on every push and shows your current grade and score.
 
 ---
 

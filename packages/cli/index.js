@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 'use strict'
 
-const fs   = require('fs')
-const path = require('path')
+const fs       = require('fs')
+const path     = require('path')
 const readline = require('readline')
+const { execSync } = require('child_process')
 
 // ── Inline scorer ──────────────────────────────────────────────
 // We embed score.js directly in the workflow so:
@@ -16,6 +17,8 @@ const SCORER_INLINE = fs.readFileSync(
   path.join(__dirname, 'graidr-scorer.cjs'),
   'utf8'
 )
+
+const PKG_VERSION = require('./package.json').version
 
 const WORKFLOW_CONTENT = `name: graidr
 
@@ -60,6 +63,7 @@ const VIOLET = '\x1b[35m'
 const GREEN  = '\x1b[32m'
 const RED    = '\x1b[31m'
 const DIM    = '\x1b[2m'
+const CYAN   = '\x1b[36m'
 
 function print(msg) { process.stdout.write(msg + '\n') }
 function bold(s)    { return BOLD + s + RESET }
@@ -67,10 +71,25 @@ function violet(s)  { return VIOLET + s + RESET }
 function green(s)   { return GREEN + s + RESET }
 function red(s)     { return RED + s + RESET }
 function dim(s)     { return DIM + s + RESET }
+function cyan(s)    { return CYAN + s + RESET }
 
 function ask(question) {
   const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
   return new Promise(resolve => rl.question(question, ans => { rl.close(); resolve(ans.trim().toLowerCase()) }))
+}
+
+// ── Detect GitHub owner/repo from git remote ───────────────────
+
+function detectGitHubRepo() {
+  try {
+    const remote = execSync('git remote get-url origin', { stdio: ['pipe', 'pipe', 'pipe'] })
+      .toString()
+      .trim()
+    // handles https://github.com/owner/repo.git and git@github.com:owner/repo.git
+    const match = remote.match(/github\.com[:/]([^/]+)\/([^/.]+)/)
+    if (match) return { owner: match[1], repo: match[2] }
+  } catch {}
+  return null
 }
 
 // ── Main ───────────────────────────────────────────────────────
@@ -88,7 +107,7 @@ async function main() {
   }
 
   print('')
-  print(violet(bold('graidr')) + dim(' v0.1.0'))
+  print(violet(bold('graidr')) + dim(' v' + PKG_VERSION))
   print('')
 
   // 1. Check for .git
@@ -123,18 +142,33 @@ async function main() {
   fs.writeFileSync(ymlPath, WORKFLOW_CONTENT, 'utf8')
   fs.writeFileSync(scorerPath, SCORER_INLINE.trim(), 'utf8')
 
-  // 5. Success
+  // 5. Detect repo
+  const gh = detectGitHubRepo()
+  const repoSlug = gh ? `${gh.owner}/${gh.repo}` : 'OWNER/REPO'
+  const encodedSlug = encodeURIComponent(`https://graidr.tools/api/score/${repoSlug}`)
+  const leaderboardUrl = `https://graidr.tools`
+
+  // 6. Success
   print(green('✔') + ' ' + bold('graidr installed!'))
   print('')
   print('  Your repo will be scored on every push.')
   print('  No API keys needed — uses GitHub Models automatically.')
   print('')
-  print('  Next:')
-  print('  ' + dim('git add .github/workflows/graidr.yml .github/workflows/graidr-scorer.cjs'))
-  print('  ' + dim('git commit -m "add graidr scoring"'))
-  print('  ' + dim('git push'))
+  print('  ' + dim('──────────────────────────────────────────────'))
+  print('  Next steps:')
   print('')
-  print('  View your score at: ' + violet('https://graidr.tools/repo/YOUR_REPO'))
+  print('  ' + dim('1.') + ' Commit and push the workflow:')
+  print('     ' + cyan('git add .github/workflows/graidr.yml .github/workflows/graidr-scorer.cjs'))
+  print('     ' + cyan('git commit -m "add graidr scoring"'))
+  print('     ' + cyan('git push'))
+  print('')
+  print('  ' + dim('2.') + ' Add this badge to your README:')
+  print('     ' + dim(`[![graidr score](https://img.shields.io/endpoint?url=${encodedSlug})](${leaderboardUrl})`))
+  print('')
+  print('  ' + dim('3.') + ' View your score at:')
+  print('     ' + violet(`https://graidr.tools` + (gh ? `/repo/${repoSlug}` : '')))
+  print('')
+  print('  ' + dim('──────────────────────────────────────────────'))
   print('')
 }
 
