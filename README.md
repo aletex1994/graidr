@@ -1,5 +1,7 @@
 # graidr
 
+[![graidr score](https://img.shields.io/endpoint?url=https://graidr.tools/api/score/aletex1994/graidr)](https://graidr.tools)
+
 **Automatic code quality scores for every push. Zero setup.**
 
 graidr is a GitHub Action that scores your repository across Code, Security, and UX on every push — then publishes the results to a public leaderboard at [graidr.tools](https://graidr.tools).
