@@ -22,6 +22,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://graidr.tools'),
   title: "graidr",
   description: "Automatic code quality scores for every push. Zero setup.",
   icons: { icon: '/favicon.svg' },
