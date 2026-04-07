@@ -23,6 +23,7 @@ create table if not exists scores (
   overall             int2 generated always as (
                        ((structure_score + safety_score + completeness_score) / 3)::int2
                      ) stored,
+  category            text not null default 'other' check (category in ('portfolio', 'saas', 'e-commerce', 'blog', 'dashboard', 'api', 'cli', 'library', 'docs', 'other')),
   details             jsonb,  -- { top_issues: string[], doing_well: string[] }
   rated_with          text not null default 'gpt-4o' check (rated_with in ('gpt-4o', 'gpt-4o-deep')),
   scored_at           timestamptz not null default now()
@@ -45,6 +46,7 @@ select
   l.safety_score,
   l.completeness_score,
   l.overall,
+  l.category,
   l.details,
   l.commit_sha,
   l.rated_with,

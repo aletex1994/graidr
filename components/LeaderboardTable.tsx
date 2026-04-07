@@ -140,6 +140,15 @@ export default function LeaderboardTable({ scores }: { scores: Score[] }) {
                     <span className="text-white font-medium group-hover:text-violet-300 transition-colors">
                       {score.name}
                     </span>
+{score.category && score.category !== 'other' && (
+                      <span
+                        className="text-[10px] font-semibold px-1 py-px rounded bg-orange-500/10 text-orange-400 ring-1 ring-inset ring-orange-500/20 leading-none cursor-default"
+                        style={{ fontFamily: 'var(--font-jetbrains-mono)' }}
+                        title={`Category: ${score.category}`}
+                      >
+                        {score.category.toUpperCase()}
+                      </span>
+                    )}
 {score.rated_with === 'gpt-4o' && (
                       <span
                         className="text-[10px] font-semibold px-1 py-px rounded bg-zinc-500/10 text-zinc-400 ring-1 ring-inset ring-zinc-500/20 leading-none cursor-default"

@@ -18,6 +18,7 @@ export type Score = {
   safety_score: number
   completeness_score: number
   overall: number
+  category: 'portfolio' | 'saas' | 'e-commerce' | 'blog' | 'dashboard' | 'api' | 'cli' | 'library' | 'docs' | 'other'
   details: {
     top_issues: string[]
     doing_well: string[]

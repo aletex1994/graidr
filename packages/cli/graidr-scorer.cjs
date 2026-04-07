@@ -8,10 +8,13 @@
  */
 
 'use strict'
-
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { execSync } = require('child_process')
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const https = require('https')
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const fs = require('fs')
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const path = require('path')
 
 // ── endpoints ─────────────────────────────────────────────────
@@ -298,11 +301,17 @@ IMPORTANT: You are seeing a PARTIAL sample of the repo. If you cannot verify som
 - Default boilerplate removed (no leftover starter code): 0-10
 - Project feels intentional, not abandoned mid-build: 0-10
 
+## Repo category — classify this repo into EXACTLY ONE of these categories:
+portfolio, saas, e-commerce, blog, dashboard, api, cli, library, docs, other
+
+Pick the single best fit based on the repo's purpose and structure.
+
 ## Output format — return ONLY this JSON, no other text:
 {
   "structure_subjective": <integer 0-50>,
   "safety_subjective": <integer 0-50>,
   "completeness_subjective": <integer 0-50>,
+  "category": "<one of: portfolio, saas, e-commerce, blog, dashboard, api, cli, library, docs, other>",
   "top_issues": [
     "<specific actionable issue with file name if possible>",
     "<specific actionable issue>",
@@ -335,6 +344,7 @@ Rules:
     structure_score: Math.min(100, deterministicScores.structure + (subjective.structure_subjective || 0)),
     safety_score: Math.min(100, deterministicScores.safety + (subjective.safety_subjective || 0)),
     completeness_score: Math.min(100, deterministicScores.completeness + (subjective.completeness_subjective || 0)),
+    category: subjective.category || 'other',
     top_issues: subjective.top_issues || [],
     doing_well: subjective.doing_well || [],
   }
@@ -364,6 +374,7 @@ async function submitScore(score, ratedWith) {
       structure_score: score.structure_score,
       safety_score: score.safety_score,
       completeness_score: score.completeness_score,
+      category: score.category,
       top_issues: score.top_issues,
       doing_well: score.doing_well,
       rated_with: ratedWith,
@@ -496,4 +507,3 @@ main().catch(err => {
   console.error('graidr: non-fatal error —', err.message ?? err)
   process.exit(0) // never fail the pipeline
 })
-

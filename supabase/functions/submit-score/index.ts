@@ -105,6 +105,11 @@ function validatePayload(body: Record<string, unknown>): string | null {
     return 'github_sha must be a valid commit SHA'
   }
 
+  const validCategories = ['portfolio', 'saas', 'e-commerce', 'blog', 'dashboard', 'api', 'cli', 'library', 'docs', 'other']
+  if (body.category !== undefined && (typeof body.category !== 'string' || !validCategories.includes(body.category))) {
+    return `category must be one of: ${validCategories.join(', ')}`
+  }
+
   return null
 }
 
@@ -182,6 +187,7 @@ Deno.serve(async (req) => {
     structure_score: body.structure_score,
     safety_score: body.safety_score,
     completeness_score: body.completeness_score,
+    category: body.category || 'other',
     details: {
       top_issues: body.top_issues,
       doing_well: body.doing_well,
