@@ -19,9 +19,9 @@ function gradeLabel(overall: number): string {
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { owner: string; name: string } }
+  ctx: { params: Promise<{ owner: string; name: string }> }
 ) {
-  const { owner, name } = params
+  const { owner, name } = await ctx.params
 
   const { data, error } = await supabase
     .from('leaderboard')
