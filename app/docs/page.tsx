@@ -3,9 +3,9 @@ import Navbar from '@/components/Navbar'
 import { CopyCommand } from '@/components/CopyCommand'
 
 const GRADE_SCALE = [
-  { grade: 'S', range: '90–100', color: 'text-violet-400 border-violet-500/30 bg-violet-500/10', desc: 'Exemplary' },
+  { grade: 'S', range: '90–100', color: 'text-orange-400 border-orange-500/30 bg-orange-500/10', desc: 'Exemplary' },
   { grade: 'A', range: '80–89',  color: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10', desc: 'Solid' },
-  { grade: 'B', range: '70–79',  color: 'text-blue-400 border-blue-500/30 bg-blue-500/10', desc: 'Adequate' },
+  { grade: 'B', range: '70–79',  color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10', desc: 'Adequate' },
   { grade: 'C', range: '50–69',  color: 'text-amber-400 border-amber-500/30 bg-amber-500/10', desc: 'Weak' },
   { grade: 'D', range: '0–49',   color: 'text-red-400 border-red-500/30 bg-red-500/10', desc: 'Poor' },
 ]
@@ -13,9 +13,9 @@ const GRADE_SCALE = [
 const DIMENSIONS = [
   {
     name: 'Structure',
-    color: 'text-violet-400',
-    border: 'border-violet-500/20',
-    bg: 'bg-violet-500/5',
+    color: 'text-orange-400',
+    border: 'border-orange-500/20',
+    bg: 'bg-orange-500/5',
     deterministic: [
       { check: 'TypeScript present', points: 10 },
       { check: 'Test files found', points: 10 },
@@ -53,9 +53,9 @@ const DIMENSIONS = [
   },
   {
     name: 'Completeness',
-    color: 'text-blue-400',
-    border: 'border-blue-500/20',
-    bg: 'bg-blue-500/5',
+    color: 'text-cyan-400',
+    border: 'border-cyan-500/20',
+    bg: 'bg-cyan-500/5',
     deterministic: [
       { check: 'README over 10 lines', points: 10 },
       { check: 'Lock file committed', points: 10 },
@@ -75,13 +75,13 @@ const DIMENSIONS = [
 
 export default function Docs() {
   return (
-    <div className="min-h-screen bg-[#09090b] text-white">
+    <div className="min-h-screen bg-[#0f0f0f] text-white">
       {/* Background gradient */}
       <div
         className="pointer-events-none fixed inset-0 z-0"
         aria-hidden="true"
         style={{
-          background: 'radial-gradient(ellipse 70% 40% at 50% 0%, rgba(124,58,237,0.10) 0%, transparent 65%)',
+          background: 'radial-gradient(ellipse 70% 40% at 50% 0%, rgba(234,88,12,0.10) 0%, transparent 65%)',
         }}
       />
 
@@ -92,7 +92,7 @@ export default function Docs() {
         {/* ── Hero ────────────────────────────────────────────────── */}
         <section className="pt-16 pb-12 border-b border-zinc-800">
           <p className="text-xs text-zinc-500 mb-3" style={{ fontFamily: 'var(--font-jetbrains-mono)' }}>documentation</p>
-          <h1 className="text-4xl font-light tracking-tight text-zinc-100 mb-3">
+          <h1 className="text-4xl font-light tracking-tight text-zinc-100 mb-3" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
             How graidr works
           </h1>
           <p className="text-zinc-400 text-base max-w-xl leading-relaxed">
@@ -102,7 +102,7 @@ export default function Docs() {
 
         {/* ── Getting started ─────────────────────────────────────── */}
         <section className="py-12 border-b border-zinc-800 space-y-6">
-          <h2 className="text-xl font-medium text-zinc-100">Getting started</h2>
+          <h2 className="text-xl font-medium text-zinc-100" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>Getting started</h2>
           <p className="text-zinc-400 text-sm leading-relaxed">
             Run this inside any git repository. Graidr installs a GitHub Actions workflow that scores your code on every push.
           </p>
@@ -119,7 +119,7 @@ export default function Docs() {
             ].map(({ step, title, desc }) => (
               <div key={step} className="flex gap-4 p-4 rounded-lg border border-zinc-800 bg-zinc-900/30">
                 <span
-                  className="text-xs text-violet-400 w-5 h-5 rounded-full border border-violet-500/30 bg-violet-500/10 flex items-center justify-center flex-shrink-0 mt-0.5"
+                  className="text-xs text-orange-400 w-5 h-5 rounded-full border border-orange-500/30 bg-orange-500/10 flex items-center justify-center flex-shrink-0 mt-0.5"
                   style={{ fontFamily: 'var(--font-jetbrains-mono)' }}
                 >
                   {step}

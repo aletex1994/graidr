@@ -21,7 +21,7 @@ export function Logo({ size = 'md', variant = 'full' }: LogoProps) {
     const fontSizes = { sm: '1rem', md: '1.25rem', lg: '1.75rem' }
     return (
       <span style={{ fontFamily: 'Inter, sans-serif', fontWeight: 900, fontSize: fontSizes[size], letterSpacing: '-0.05em', color: '#ffffff' }}>
-        grai<span style={{ color: '#7F77DD' }}>i</span>dr
+        grai<span style={{ color: '#fb923c' }}>i</span>dr
       </span>
     )
   }

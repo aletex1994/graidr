@@ -3,9 +3,10 @@
   "configurations": [
     {
       "name": "graidr",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 3000
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": ["-c", "export PATH=/opt/homebrew/opt/node@25/bin:$PATH && npm run dev"],
+      "port": 3000,
+      "autoPort": true
     }
   ]
 }

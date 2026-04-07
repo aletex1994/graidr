@@ -16,17 +16,17 @@ async function getTopRepos(): Promise<Score[]> {
 }
 
 const GRADE_SCALE = [
-  { grade: 'S', range: '90–100', color: 'text-violet-400 border-violet-500/30 bg-violet-500/10' },
+  { grade: 'S', range: '90–100', color: 'text-orange-400 border-orange-500/30 bg-orange-500/10' },
   { grade: 'A', range: '80–89',  color: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' },
-  { grade: 'B', range: '70–79',  color: 'text-blue-400 border-blue-500/30 bg-blue-500/10' },
+  { grade: 'B', range: '70–79',  color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10' },
   { grade: 'C', range: '50–69',  color: 'text-amber-400 border-amber-500/30 bg-amber-500/10' },
   { grade: 'D', range: '0–49',   color: 'text-red-400 border-red-500/30 bg-red-500/10' },
 ]
 
 function scoreColor(n: number) {
-  if (n >= 90) return 'text-violet-400'
+  if (n >= 90) return 'text-orange-400'
   if (n >= 80) return 'text-emerald-400'
-  if (n >= 70) return 'text-blue-400'
+  if (n >= 70) return 'text-cyan-400'
   if (n >= 50) return 'text-amber-400'
   return 'text-red-400'
 }
@@ -43,13 +43,13 @@ export default async function Home() {
   const topRepos = await getTopRepos()
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-white">
+    <div className="min-h-screen bg-[#0f0f0f] text-white">
       {/* Background gradient */}
       <div
         className="pointer-events-none fixed inset-0 z-0"
         aria-hidden="true"
         style={{
-          background: 'radial-gradient(ellipse 70% 40% at 50% 0%, rgba(124,58,237,0.12) 0%, transparent 65%)',
+          background: 'radial-gradient(ellipse 70% 40% at 50% 0%, rgba(234,88,12,0.12) 0%, transparent 65%)',
         }}
       />
 
@@ -59,12 +59,6 @@ export default async function Home() {
 
         {/* ── Hero ────────────────────────────────────────────────── */}
         <section className="pt-20 pb-16 flex flex-col gap-3">
-
-          {/* Logo lockup */}
-          <div className="mb-1">
-            <Logo size="lg" />
-          </div>
-
           {/* Pronunciation */}
           <p className="text-xs text-zinc-500" style={{ fontFamily: 'var(--font-jetbrains-mono)' }}>
             <span className="text-zinc-400">/ɡreɪ·dər/</span>
@@ -72,25 +66,25 @@ export default async function Home() {
           </p>
 
           {/* Headline */}
-          <h1 className="text-5xl md:text-6xl font-light tracking-tight leading-[1.08] mt-1">
-            <span className="text-zinc-300">How good is your</span>
+          <h1 className="text-5xl md:text-6xl font-light tracking-tight leading-[1.08] mt-1" style={{ fontFamily: 'var(--font-ibm-plex-mono)' }}>
+            <span className="text-zinc-300">Does your vibe code</span>
             <br />
             <span
               className="font-semibold"
               style={{
-                background: 'linear-gradient(90deg, #ffffff 0%, #a78bfa 100%)',
+                background: 'linear-gradient(90deg, #ffffff 0%, #fb923c 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
               }}
             >
-              vibe-coded app?
+              actually hold up?
             </span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-base text-zinc-400 max-w-lg leading-snug">
-            Scores your repo on Structure, Safety and Completeness — on every push. Free.
+            Automatic code quality scores on every push — no API keys, zero setup, free forever.
           </p>
 
           {/* Install command */}
